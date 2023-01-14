@@ -7,39 +7,39 @@ assignees: ''
 
 ---
 
-**Please read this section before you create an issue**
+## Please read this section before you create an issue
 - Fill out all the following sections. If not applicable, leave the section blank or "None"
 - Delete this section and explanation text in each section after you write your description
 - Consider to use code blocks ( \` \` , \`\`\`  \`\`\` )
 
-**Describe the issue**
+## Describe the issue
 A clear and concise description of what the issue is.
 
-**To Reproduce**
+## To Reproduce
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+## Expected behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
+## Screenshots
 If applicable, add screenshots to help explain your problem.
 
-**Environment**
+## Environment
  - Hardware: [e.g. PC, Raspberry Pi 4, Jetson Nano]
  - CPU: [e.g. Intel Core i7-11700 2.5GHz]
  - GPU: [e.g. NVIDIA GeForce RTX 3060 Ti]
  - OS: [e.g. Ubuntu 20.04]
  - Commit id [e.g. 57dddf66631bcfb23ccf56de006662ff10d2723b]
 
-**Build Command**
+## Build Command
 Commands you used.
 
-**Log**
+## Log
 Add output of terminal.
 
-**Additional context**
+## Additional context
 Add any other context about the problem here.
