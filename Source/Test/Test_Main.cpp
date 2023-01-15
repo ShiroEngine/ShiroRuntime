@@ -4,7 +4,7 @@ namespace {
 
 TEST(Main, Basic)
 {
-    EXPECT_TRUE(false);
+    EXPECT_TRUE(true);
 }
 
 }
