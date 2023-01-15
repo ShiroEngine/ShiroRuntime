@@ -23,13 +23,17 @@ How to build for each platform
 **Clone the repository**
 ```cmd
 > git clone https://github.com/ShiroEngine/ShiroRuntime.git
+> cd ShiroRuntime
+```
+If you want to build a test, run this command.
+```cmd
+ShiroRuntime > git submodule update --init --recursive
 ```
 
 **Build**
 
 After the command is executed, the executable file `Build\Bin\Debug\ShiroRuntime.exe` is output.
 ```cmd
-> cd ShiroRuntime
 ShiroRuntime > cmake -HSource -BBuild
 ShiroRuntime > cmake --build Build --config Debug
 ```
