@@ -1,13 +1,33 @@
 name: Windows
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, feature-#2-include-ci ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 jobs:
   test:
-    runs-on: [ windows-2022 ]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2019]
+        cxx_standard: [17, 20]
+        configuration: [Debug, Release]
+        platform: [x64, x86]
+
     steps:
-      - name: Hello
-        run: echo "Hello!!"
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Configure CMake
+        run: cmake -HSource -BBuild -DBUILD_TEST=TRUE
+
+      - name: Build
+        run: cmake --build Build --config ${{ matrix.configuration }}
+
+      - name: Test
+        run: |
+            cd Build
+            ctest -j 4 -C ${{ matrix.configuration }}
