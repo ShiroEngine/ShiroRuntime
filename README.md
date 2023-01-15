@@ -7,6 +7,7 @@ Here is the basic build procedure.
 1. Install Pre-requisites
 1. Clone the repository
 1. Build
+1. Testing (Optional)
 
 How to build for each platform
 
@@ -31,6 +32,14 @@ After the command is executed, the executable file `Build\Bin\Debug\ShiroRuntime
 > cd ShiroRuntime
 ShiroRuntime > cmake -HSource -BBuild
 ShiroRuntime > cmake --build Build --config Debug
+```
+
+**Testing (Optional)**
+
+Use the `ctest` command.
+```cmd
+ShiroRuntime > cd Build
+ShiroRuntime\Build > ctest
 ```
 
 

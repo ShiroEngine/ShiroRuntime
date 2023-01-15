@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.18.1)
 
-if (NOT BUILD_TEST)
-    RETURN()
-endif()
-
 set(TARGET_NAME_BASE ShiroRuntime)
 set(TARGET_NAME Test_${TARGET_NAME_BASE})
 
@@ -15,7 +11,6 @@ set(TARGET_NAME Test_${TARGET_NAME_BASE})
 #    endif()
 #endif()
 
-
 project(${TARGET_NAME})
 
 shiro_discover_tests(
@@ -24,7 +19,4 @@ shiro_discover_tests(
 
     SOURCES
     "Test_Main.cpp"
-
-#    LIBRARIES
-#    Shiro::${TARGET_NAME_BASE}
 )
