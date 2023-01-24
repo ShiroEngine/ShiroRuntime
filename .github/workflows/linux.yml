@@ -16,7 +16,7 @@ jobs:
         configuration: [Debug, Release]
 
     env:
-        ARCHIVE_NAME: ${{ matrix.os }}-${{ matrix.cxx_standard }}-${{ matrix.configuration }}.zip
+        ARCHIVE_NAME: ${{ matrix.os }}-${{ matrix.cxx_standard }}-${{ matrix.configuration }}.tgz
 
     steps:
       - uses: actions/checkout@v3
@@ -36,8 +36,8 @@ jobs:
 
       - name: Package
         run: |
-            mkdir ${{ github.workspace }}/Archive
-            tar czvf ${{ github.workspace }}/Archive/${{ env.ARCHIVE_NAME }} ${{ github.workspace }}/Build/Bin/${{ matrix.configuration }}/ShiroRuntime
+            mkdir Archive
+            tar czvf Archive/${{ env.ARCHIVE_NAME }} ${{ github.workspace }}/Build/Bin/ShiroRuntime
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
