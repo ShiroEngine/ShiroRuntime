@@ -16,6 +16,9 @@ jobs:
         configuration: [Debug, Release]
         platform: [x64, x86]
 
+    env:
+        ARCHIVE_NAME: ${{ matrix.os }}-${{ matrix.cxx_standard }}-${{ matrix.platform }}-${{ matrix.configuration }}.zip
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -31,6 +34,17 @@ jobs:
         run: |
             cd Build
             ctest -j 4 -C ${{ matrix.configuration }}
+
+      - name: Package
+        run: |
+            mkdir ${{ github.workspace }}\Archive
+            PowerShell Compress-Archive -Path ${{ github.workspace }}\Build\Bin\${{ matrix.configuration }}\ShiroRuntime.exe -DestinationPath ${{ github.workspace }}\Archive\${{ env.ARCHIVE_NAME }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARCHIVE_NAME }}
+          path: ${{ github.workspace }}\Archive\${{ env.ARCHIVE_NAME }}
 
       - name: Discord Notification
         uses: sarisia/actions-status-discord@v1
