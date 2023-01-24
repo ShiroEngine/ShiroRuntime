@@ -1,0 +1,53 @@
+name: Linux
+on:
+  push:
+    branches: [ main, feature-#2-include-ci ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-22.04, ubuntu-20.04, ubuntu-18.04 ]
+        cxx_standard: [17, 20]
+        configuration: [Debug, Release]
+
+    env:
+        ARCHIVE_NAME: ${{ matrix.os }}-${{ matrix.cxx_standard }}-${{ matrix.configuration }}.zip
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Configure CMake
+        run: cmake -HSource -BBuild -DBUILD_TEST=TRUE
+
+      - name: Build
+        run: cmake --build Build --config ${{ matrix.configuration }}
+
+      - name: Test
+        run: |
+            cd Build
+            ctest -j 4 -C ${{ matrix.configuration }}
+
+      - name: Package
+        run: |
+            mkdir ${{ github.workspace }}/Archive
+            tar czvf ${{ github.workspace }}/Archive/${{ env.ARCHIVE_NAME }} ${{ github.workspace }}/Build/Bin/${{ matrix.configuration }}/ShiroRuntime
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARCHIVE_NAME }}
+          path: ${{ github.workspace }}/Archive/${{ env.ARCHIVE_NAME }}
+
+      - name: Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          status: ${{ job.status }}
