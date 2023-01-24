@@ -1,7 +1,7 @@
 name: Windows
 on:
   push:
-    branches: [ main, feature-#2-include-ci ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
