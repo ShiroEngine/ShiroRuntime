@@ -19,21 +19,30 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
+        cxx_standard: [ 17, 20 ]
+        configuration: [ Debug, Release ]
         language: [ 'cpp' ]
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
 
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
-      with:
-        working-directory: ./Source/
+#    - name: Autobuild
+#      uses: github/codeql-action/autobuild@v2
+#      with:
+#        working-directory: ./Source/
+
+    - name: Build
+      run: |
+          cmake -HSource -BBuild -DBUILD_TEST=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+          cmake --build Build --config ${{ matrix.configuration }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
