@@ -37,7 +37,7 @@ jobs:
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
       with:
-        working-directory: ./Source/
+        working-directory: ./Source
 
 #    - name: Build
 #      run: |
