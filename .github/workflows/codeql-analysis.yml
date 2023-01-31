@@ -1,0 +1,46 @@
+
+name: CodeQL
+
+on:
+  push:
+    branches: [ main, feature-#3-static-analysis ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  CodeQL-Build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        cxx_standard: [ 17, 20 ]
+        configuration: [ Debug, Release ]
+
+    permissions:
+      # required for all workflows
+      security-events: write
+
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      # Initializes the CodeQL tools for scanning.
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: cpp
+
+      - name: Configure CMake
+        run: cmake -HSource -BBuild -DBUILD_TEST=FALSE
+
+      - name: Build
+        run: cmake --build Build --config ${{ matrix.configuration }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
