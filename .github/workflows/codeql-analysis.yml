@@ -34,15 +34,15 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-#    - name: Autobuild
-#      uses: github/codeql-action/autobuild@v2
-#      with:
-#        working-directory: ./Source/
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+      with:
+        working-directory: ./Source/
 
-    - name: Build
-      run: |
-          cmake -HSource -BBuild -DBUILD_TEST=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
-          cmake --build Build --config ${{ matrix.configuration }}
+#    - name: Build
+#      run: |
+#          cmake -HSource -BBuild -DBUILD_TEST=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+#          cmake --build Build --config ${{ matrix.configuration }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
