@@ -36,11 +36,11 @@ jobs:
         with:
           languages: cpp
 
-      - name: Configure CMake
-        run: cmake -HSource -BBuild -DBUILD_TEST=FALSE
-
       - name: Build
-        run: cmake --build Build --config ${{ matrix.configuration }}
+        run: |
+          cmake -HSource -BBuild -DBUILD_TEST=OFF
+          cd Build
+          cmake --build . --config ${{ matrix.configuration }}
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
