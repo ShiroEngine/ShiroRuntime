@@ -34,11 +34,6 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-#    - name: Autobuild
-#      uses: github/codeql-action/autobuild@v2
-#      with:
-#        working-directory: ./Source
-
     - name: Build
       run: |
           cmake -HSource -BBuild -DBUILD_TEST=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
