@@ -4,6 +4,7 @@ This is ShiroEngine's Runtime project.
 
 [![Linux](https://github.com/ShiroEngine/ShiroRuntime/actions/workflows/linux.yml/badge.svg)](https://github.com/ShiroEngine/ShiroRuntime/actions/workflows/linux.yml)
 [![Windows](https://github.com/ShiroEngine/ShiroRuntime/actions/workflows/windows.yml/badge.svg)](https://github.com/ShiroEngine/ShiroRuntime/actions/workflows/windows.yml)
+[![CodeQL](https://github.com/ShiroEngine/ShiroRuntime/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ShiroEngine/ShiroRuntime/actions/workflows/codeql-analysis.yml)
 
 ## Build
 Here is the basic build procedure.
