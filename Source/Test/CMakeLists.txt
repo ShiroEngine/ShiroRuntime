@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18.1)
+cmake_minimum_required(VERSION 3.20.6)
 
 set(TARGET_NAME_BASE ShiroRuntime)
 set(TARGET_NAME Test_${TARGET_NAME_BASE})
