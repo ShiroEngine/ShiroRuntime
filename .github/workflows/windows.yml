@@ -7,17 +7,14 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2022, windows-2019]
-        cxx_standard: [17, 20]
         configuration: [Debug, Release]
-        platform: [x64, x86]
 
     env:
-        ARCHIVE_NAME: ${{ matrix.os }}-${{ matrix.cxx_standard }}-${{ matrix.platform }}-${{ matrix.configuration }}.zip
+        ARCHIVE_NAME: ${{ matrix.configuration }}.zip
 
     steps:
       - uses: actions/checkout@v3

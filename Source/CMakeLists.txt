@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18.1)
+cmake_minimum_required(VERSION 3.20.6)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -12,6 +12,10 @@ project(ShiroRuntime)
 
 add_executable(
     ShiroRuntime
+)
+target_sources(
+    ShiroRuntime
+    PRIVATE
     Main.cpp
 )
 
@@ -19,6 +23,7 @@ set_target_properties(
     ShiroRuntime
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Bin"
+    CXX_STANDARD 23
 )
 
 add_subdirectory(ThirdParty)
@@ -48,6 +53,12 @@ if (BUILD_TEST)
             ${MYFUNC_TARGET}
             PRIVATE
             ${MYFUNC_LIBRARIES} GTest::gtest GTest::gtest_main
+        )
+        
+        set_target_properties(
+            ${MYFUNC_TARGET}
+            PROPERTIES
+            CXX_STANDARD 23
         )
 
         gtest_discover_tests(

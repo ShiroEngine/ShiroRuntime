@@ -7,16 +7,14 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-22.04, ubuntu-20.04, ubuntu-18.04 ]
-        cxx_standard: [17, 20]
         configuration: [Debug, Release]
 
     env:
-        ARCHIVE_NAME: ${{ matrix.os }}-${{ matrix.cxx_standard }}-${{ matrix.configuration }}.tgz
+        ARCHIVE_NAME: ${{ matrix.configuration }}.tgz
 
     steps:
       - uses: actions/checkout@v3
